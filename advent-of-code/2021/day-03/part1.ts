@@ -5,18 +5,9 @@ let gammaRate: number | string = '';
 let epsilonRate = 0;
 
 for (let i = 0; i < parsed[0].length; i++) {
-    const bit: { [key: string]: number } = {
-        0: 0,
-        1: 0,
-    };
-    for (let j = 0, len = parsed.length; j < len; j++) {
-        bit[parsed[j][i]]++;
-    }
-    if (bit[0] > bit[1]) {
-        gammaRate += '0';
-    } else {
-        gammaRate += '1';
-    }
+    const bit0 = parsed.filter((e) => e[i] === '0').length;
+    const bit1 = parsed.length - bit0;
+    gammaRate += bit0 > bit1 ? '0' : '1';
 }
 
 gammaRate = parseInt(gammaRate, 2);
