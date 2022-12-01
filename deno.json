@@ -1,0 +1,12 @@
+{
+    "fmt": {
+        "options": {
+            "indentWidth": 4,
+            "lineWidth": 88,
+            "singleQuote": true
+        }
+    },
+    "tasks": {
+        "aoc": "deno run --watch --allow-read --allow-net=deno.land --allow-hrtime ./advent-of-code/runner.ts"
+    }
+}

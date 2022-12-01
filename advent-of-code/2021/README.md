@@ -37,4 +37,8 @@ My solution to Advent of Code 2021.
 
 #### Methodology
 
-The benchmark is measured by mean of 100 run loop, with 100 run loop as warm-up, through all excluding IO (typically takes around 2-4ms). Programmed using `TypeScript` ran via `Deno 1.16.3` with flag `--allow-read --allow-write --allow-hrtime --watch`. Part 1 and part 2 is separated in the runtime. CPU used is `Intel Core i9-9900K`. Single run typically result up to 1-16x duration depending on the test.
+The benchmark is measured by mean of 100 run loop, with 100 run loop as warm-up, through
+all excluding IO (typically takes around 2-4ms). Programmed using `TypeScript` ran via
+`Deno 1.16.3` with flag `--allow-read --allow-write --allow-hrtime --watch`. Part 1 and
+part 2 is separated in the runtime. CPU used is `Intel Core i9-9900K`. Single run
+typically result up to 1-16x duration depending on the test.
