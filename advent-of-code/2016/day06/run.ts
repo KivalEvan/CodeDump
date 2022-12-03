@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input.split('\n').filter((s) => s !== '');
 }
@@ -17,7 +18,9 @@ export function part1() {
     for (let i = 0, len = input[0].length; i < len; i++) {
         const letter: { [key: string]: number } = {};
         for (const line of input) {
-            letter[line[i]] = typeof letter[line[i]] !== 'undefined' ? ++letter[line[i]] : 1;
+            letter[line[i]] = typeof letter[line[i]] !== 'undefined'
+                ? ++letter[line[i]]
+                : 1;
         }
         output += Object.entries(letter).sort((a, b) => b[1] - a[1])[0][0];
     }
@@ -30,9 +33,13 @@ export function part2() {
     for (let i = 0, len = input[0].length; i < len; i++) {
         const letter: { [key: string]: number } = {};
         for (const line of input) {
-            letter[line[i]] = typeof letter[line[i]] !== 'undefined' ? ++letter[line[i]] : 1;
+            letter[line[i]] = typeof letter[line[i]] !== 'undefined'
+                ? ++letter[line[i]]
+                : 1;
         }
-        output += Object.entries(letter).sort((a, b) => b[1] - a[1])[Object.values(letter).length - 1][0];
+        output += Object.entries(letter).sort((a, b) =>
+            b[1] - a[1]
+        )[Object.values(letter).length - 1][0];
     }
     return output;
 }

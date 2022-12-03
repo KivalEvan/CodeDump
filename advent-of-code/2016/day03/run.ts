@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input
         .split('\n')
@@ -24,7 +25,10 @@ export function part1() {
     let possible = 0;
 
     for (const line of input) {
-        possible += line[0] + line[1] > line[2] && line[0] + line[2] > line[1] && line[1] + line[2] > line[0] ? 1 : 0;
+        possible += line[0] + line[1] > line[2] && line[0] + line[2] > line[1] &&
+                line[1] + line[2] > line[0]
+            ? 1
+            : 0;
     }
 
     return possible;
@@ -38,8 +42,8 @@ export function part2() {
         for (let j = 0; j < 3; j++) {
             possible +=
                 input[i * 3 + 0][j] + input[i * 3 + 1][j] > input[i * 3 + 2][j] &&
-                input[i * 3 + 0][j] + input[i * 3 + 2][j] > input[i * 3 + 1][j] &&
-                input[i * 3 + 1][j] + input[i * 3 + 2][j] > input[i * 3 + 0][j]
+                    input[i * 3 + 0][j] + input[i * 3 + 2][j] > input[i * 3 + 1][j] &&
+                    input[i * 3 + 1][j] + input[i * 3 + 2][j] > input[i * 3 + 0][j]
                     ? 1
                     : 0;
         }

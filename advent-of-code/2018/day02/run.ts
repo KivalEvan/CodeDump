@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input.split('\n').filter((e) => e !== '');
 }
@@ -40,7 +41,10 @@ export function part2() {
         for (const l of box) {
             letter[l] = letter[l] ? ++letter[l] : 1;
         }
-        if (Object.values(letter).find((l) => l === 2) || Object.values(letter).find((l) => l === 3)) {
+        if (
+            Object.values(letter).find((l) => l === 2) ||
+            Object.values(letter).find((l) => l === 3)
+        ) {
             boxList.push(box);
         }
     }

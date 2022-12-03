@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input.split('\n').filter((s) => s !== '');
 }

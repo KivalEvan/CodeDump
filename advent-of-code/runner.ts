@@ -64,9 +64,15 @@ for (let year = startYear; year <= endYear; year++) {
                 const test1 = run.part1();
                 const test2 = run.part2();
                 console.log('Test 1:', test1);
-                console.assert(test1 === run.tests.part1, `Expected ${run.tests.part1}`);
+                console.assert(
+                    test1 === run.tests.part1,
+                    `Expected ${run.tests.part1}`,
+                );
                 console.log('Test 2:', test2);
-                console.assert(test2 === run.tests.part2, `Expected ${run.tests.part2}`);
+                console.assert(
+                    test2 === run.tests.part2,
+                    `Expected ${run.tests.part2}`,
+                );
                 console.log();
                 run.settings.test = false;
             }

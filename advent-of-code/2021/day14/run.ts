@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input
         .trim()
@@ -54,7 +55,8 @@ export function part1() {
         element[insertion[p]] += pair[p];
     }
 
-    const quantify = Math.max(...Object.values(element)) - Math.min(...Object.values(element));
+    const quantify = Math.max(...Object.values(element)) -
+        Math.min(...Object.values(element));
     return quantify;
 }
 

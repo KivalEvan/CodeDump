@@ -7,7 +7,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input;
 }
@@ -15,7 +16,9 @@ export function getInput(alternate = false) {
 const encoder = new TextEncoder();
 
 const createMd5Hash = (data: string) => {
-    const md5Value = new Uint8Array(crypto.subtle.digestSync('MD5', encoder.encode(data)));
+    const md5Value = new Uint8Array(
+        crypto.subtle.digestSync('MD5', encoder.encode(data)),
+    );
     // convert from bin to hex
     const response = Array.from(md5Value)
         .map((b) => b.toString(16).padStart(2, '0'))

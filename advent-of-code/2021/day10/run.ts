@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input
         .trim()
@@ -102,7 +103,7 @@ export function part2() {
             stack
                 .map((c) => scoring[closing[c]])
                 .reverse()
-                .reduce((t, n) => t * 5 + n, 0)
+                .reduce((t, n) => t * 5 + n, 0),
         );
     }
     const total = scored.sort((a, b) => a - b)[Math.floor(scored.length / 2)];

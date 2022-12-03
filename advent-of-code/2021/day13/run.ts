@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input
         .trim()
@@ -17,10 +18,14 @@ export function getInput(alternate = false) {
 export function part1() {
     const parsed = getInput();
 
-    const point = parsed.filter((n) => n.includes(',')).map((n) => n.split(',').map((m) => parseInt(m)));
+    const point = parsed.filter((n) => n.includes(',')).map((n) =>
+        n.split(',').map((m) => parseInt(m))
+    );
     let maxX = Math.max(...point.map((n) => n[0])) + 1;
     let maxY = Math.max(...point.map((n) => n[1])) + 1;
-    const instruction = parsed.filter((n) => !n.includes(',')).map((s) => s.match(/\w=\d+/)![0].split('='));
+    const instruction = parsed.filter((n) => !n.includes(',')).map((s) =>
+        s.match(/\w=\d+/)![0].split('=')
+    );
 
     const plot: boolean[][] = [];
     for (let y = 0; y < maxY; y++) {
@@ -71,10 +76,14 @@ export function part1() {
 export function part2() {
     const parsed = getInput();
 
-    const point = parsed.filter((n) => n.includes(',')).map((n) => n.split(',').map((m) => parseInt(m)));
+    const point = parsed.filter((n) => n.includes(',')).map((n) =>
+        n.split(',').map((m) => parseInt(m))
+    );
     let maxX = Math.max(...point.map((n) => n[0])) + 1;
     let maxY = Math.max(...point.map((n) => n[1])) + 1;
-    const instruction = parsed.filter((n) => !n.includes(',')).map((s) => s.match(/\w=\d+/)![0].split('='));
+    const instruction = parsed.filter((n) => !n.includes(',')).map((s) =>
+        s.match(/\w=\d+/)![0].split('=')
+    );
 
     const plot: boolean[][] = [];
     for (let y = 0; y < maxY; y++) {

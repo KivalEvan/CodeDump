@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input.split('\n').filter((e) => e !== '');
 }
@@ -39,7 +40,11 @@ export function part2() {
     ];
     for (const c of condition) {
         let count = 0;
-        for (let row = c[1], column = c[0], len = input.length; row < len; column += c[0], row += c[1]) {
+        for (
+            let row = c[1], column = c[0], len = input.length;
+            row < len;
+            column += c[0], row += c[1]
+        ) {
             if (input[row][column % input[row].length] === '#') {
                 count++;
             }

@@ -6,7 +6,8 @@ export const settings = {
 
 export function getInput(alternate = false) {
     const input = Deno.readTextFileSync(
-        settings.path + (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt')
+        settings.path +
+            (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
     return input.split('\n').filter((s) => s !== '');
 }
@@ -60,22 +61,34 @@ export function part2() {
         for (const s of line) {
             switch (s) {
                 case 'U':
-                    if (position[0] - 1 >= 0 && keypad[position[0] - 1][position[1]] != null) {
+                    if (
+                        position[0] - 1 >= 0 &&
+                        keypad[position[0] - 1][position[1]] != null
+                    ) {
                         position[0]--;
                     }
                     break;
                 case 'D':
-                    if (position[0] + 1 <= 4 && keypad[position[0] + 1][position[1]] != null) {
+                    if (
+                        position[0] + 1 <= 4 &&
+                        keypad[position[0] + 1][position[1]] != null
+                    ) {
                         position[0]++;
                     }
                     break;
                 case 'L':
-                    if (position[1] - 1 >= 0 && keypad[position[0]][position[1] - 1] != null) {
+                    if (
+                        position[1] - 1 >= 0 &&
+                        keypad[position[0]][position[1] - 1] != null
+                    ) {
                         position[1]--;
                     }
                     break;
                 case 'R':
-                    if (position[1] + 1 <= 4 && keypad[position[0]][position[1] + 1] != null) {
+                    if (
+                        position[1] + 1 <= 4 &&
+                        keypad[position[0]][position[1] + 1] != null
+                    ) {
                         position[1]++;
                     }
                     break;
