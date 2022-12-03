@@ -76,18 +76,22 @@ for (let year = startYear; year <= endYear; year++) {
                 console.log();
                 run.settings.test = false;
             }
+            console.time('Time Taken');
             const part1 = run.part1();
+            console.timeEnd('Time Taken');
             if (part1 === undefined) throw new Error('Part 1 is not finished.');
             console.log('Part 1:', part1);
 
+            console.time('Time Taken');
             const part2 = run.part2();
+            console.timeEnd('Time Taken');
             if (part2 === undefined) throw new Error('Part 2 is not finished.');
             console.log('Part 2:', part2);
         } catch (e) {
             console.error(e);
             break;
         }
-        if (new Date(year, 11, day + 1, 14) > new Date()) {
+        if (new Date(year, 11, day + 1, 13) > new Date()) {
             console.log('\nWait for the next day.');
             break;
         }

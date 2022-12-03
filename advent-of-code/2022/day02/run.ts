@@ -10,7 +10,10 @@ export function getInput(alternate = false) {
         settings.path +
             (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
-    return input.split('\n').map((s) => s.split(' '));
+    return input
+        .split('\n')
+        .filter((e) => e !== '')
+        .map((s) => s.split(' '));
 }
 
 type OpponentInput = 'A' | 'B' | 'C';
@@ -131,6 +134,9 @@ export function part1() {
     const input = getInput();
     let score = 0;
     for (const s of input) {
+        if (!s[0]) {
+            continue;
+        }
         score += Outcome[game(s[0] as OpponentInput, s[1] as YourInput)] +
             getScore(s[1]);
     }
@@ -141,7 +147,7 @@ export function part2() {
     const input = getInput();
     let score = 0;
     for (const s of input) {
-        if (!s) {
+        if (!s[0]) {
             continue;
         }
         const change = decide(s[0] as OpponentInput, s[1] as YourInput);
@@ -160,6 +166,6 @@ if (import.meta.main) {
     console.assert(test2 === tests.part2, `Expected ${tests.part2}`);
     console.log();
     settings.test = false;
-    // console.log('Run Part 1:\n', part1());
-    // console.log('Run Part 2:\n', part2());
+    console.log('Run Part 1:\n', part1());
+    console.log('Run Part 2:\n', part2());
 }
