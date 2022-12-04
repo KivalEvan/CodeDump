@@ -1,4 +1,4 @@
-export const tests = { part1: null, part2: null };
+export const tests = { part1: 2, part2: 4 };
 export const settings = {
     path: '',
     test: false,
@@ -9,17 +9,41 @@ export function getInput(alternate = false) {
         settings.path +
             (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
-    return input;
+    return input.split('\n').map((n) =>
+        n.split(',').map((s) => s.split('-').map((x) => parseInt(x)))
+    );
 }
 
 export function part1() {
     const input = getInput();
-    return;
+    let total = 0;
+    for (const it of input) {
+        const [left, right] = it;
+        if (
+            (left[0] <= right[0] && left[1] >= right[1]) ||
+            (right[0] <= left[0] && right[1] >= left[1])
+        ) {
+            total++;
+        }
+    }
+    return total;
 }
 
 export function part2() {
     const input = getInput();
-    return;
+    let total = 0;
+    for (const it of input) {
+        const [left, right] = it;
+        if (
+            (left[0] <= right[0] && left[1] >= right[1]) ||
+            (right[0] <= left[0] && right[1] >= left[1]) ||
+            (left[0] >= right[0] && left[0] <= right[1]) ||
+            (left[1] >= right[0] && left[1] <= right[1])
+        ) {
+            total++;
+        }
+    }
+    return total;
 }
 
 if (import.meta.main) {

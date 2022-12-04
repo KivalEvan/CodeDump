@@ -45,8 +45,7 @@ export function part2() {
     const input = getInput();
     let sum = 0;
     let it = 0;
-    let kL = [new Set<string>(), new Set<string>(), new Set<string>()];
-    let kR = [new Set<string>(), new Set<string>(), new Set<string>()];
+    let k = [new Set<string>(), new Set<string>(), new Set<string>()];
     const findCommon = (k: Set<string>[]): number => {
         const [a, b, c] = k;
         const d = new Set<string>();
@@ -64,20 +63,13 @@ export function part2() {
     };
     for (const s of input) {
         for (const i of s) {
-            if (it < 3) {
-                kL[it].add(i);
-            }
-            if (it > 2) {
-                kR[it % 3].add(i);
-            }
+            k[it].add(i);
         }
         it++;
-        if (it === 6) {
-            sum += findCommon(kL);
-            sum += findCommon(kR);
+        if (it === 3) {
+            sum += findCommon(k);
             it = 0;
-            kL = [new Set<string>(), new Set<string>(), new Set<string>()];
-            kR = [new Set<string>(), new Set<string>(), new Set<string>()];
+            k = [new Set<string>(), new Set<string>(), new Set<string>()];
         }
     }
     return sum;
