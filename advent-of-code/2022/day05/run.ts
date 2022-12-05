@@ -1,4 +1,4 @@
-export const tests = { part1: null, part2: null };
+export const tests = { part1: 'CMZ', part2: 'MCD' };
 export const settings = {
     path: '',
     test: false,
@@ -9,17 +9,66 @@ export function getInput(alternate = false) {
         settings.path +
             (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
-    return input;
+    const temp = input.split('\n');
+    const result: { stack: { [key: number]: string[] }; command: number[][] } = {
+        stack: {},
+        command: [],
+    };
+    let it = 0;
+    for (const s of temp) {
+        if (!s) break;
+        for (let i = 1; i <= 9; i++) {
+            if (!result.stack[i]) {
+                result.stack[i] = [];
+            }
+            result.stack[i].push(s.substring((i - 1) * 4 + 1, i * 4 - 2));
+        }
+        it++;
+    }
+    for (let i = 0; i <= it; i++) {
+        temp.shift();
+    }
+    result.command = temp.map((s) =>
+        s
+            .split(' ')
+            .map((s) => parseInt(s))
+            .filter((s) => Number.isInteger(s))
+    );
+    for (let i = 1; i <= 9; i++) {
+        result.stack[i].pop();
+        result.stack[i] = result.stack[i].filter((s) => s !== ' ').toReversed();
+    }
+    return result;
 }
 
 export function part1() {
     const input = getInput();
-    return;
+    let result = '';
+    for (const c of input.command) {
+        for (let i = 0; i < c[0]; i++) {
+            input.stack[c[2]].push(input.stack[c[1]].pop()!);
+        }
+    }
+    for (const v of Object.values(input.stack)) {
+        result += v.pop();
+    }
+    return result;
 }
 
 export function part2() {
     const input = getInput();
-    return;
+    let result = '';
+    for (const c of input.command) {
+        let temp = [];
+        for (let i = 0; i < c[0]; i++) {
+            temp.push(input.stack[c[1]].pop()!);
+        }
+        input.stack[c[2]].push(...temp.reverse());
+    }
+    for (const v of Object.values(input.stack)) {
+        result += v.pop();
+    }
+    return result;
 }
 
 if (import.meta.main) {

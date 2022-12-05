@@ -56,7 +56,7 @@ for (let year = startYear; year <= endYear; year++) {
             const destinationPath = `./${year}/day${day.toString().padStart(2, '0')}/`;
             const run = (await import(`${destinationPath}/run.ts`)) as Run;
             if (!run) throw new Error('Run file not found.');
-            console.log(`${year} -- day ${day}`);
+            console.log(`----\\________\n${year} -- day ${day}`);
             run.settings.path = './advent-of-code/' + destinationPath;
 
             if (test) {
@@ -92,7 +92,7 @@ for (let year = startYear; year <= endYear; year++) {
             break;
         }
         if (new Date(year, 11, day + 1, 13) > new Date()) {
-            console.log('\nWait for the next day.');
+            console.log(`\nWait for the next day.`);
             break;
         }
         if (day === 25) {
