@@ -1,4 +1,4 @@
-export const tests = { part1: null, part2: null };
+export const tests = { part1: 7, part2: 19 };
 export const settings = {
     path: '',
     test: false,
@@ -14,12 +14,44 @@ export function getInput(alternate = false) {
 
 export function part1() {
     const input = getInput();
-    return;
+    let i = 0;
+    for (let skip = true, len = input.length; i < len - 4 && skip; i++) {
+        skip = false;
+        const str = input.substring(i, i + 4);
+        const key: { [key: string]: number } = {};
+        for (const c of str) {
+            key[c] ??= 0;
+            key[c]++;
+        }
+        for (const k in key) {
+            if (key[k] > 1) {
+                skip = true;
+                continue;
+            }
+        }
+    }
+    return i + 3;
 }
 
 export function part2() {
     const input = getInput();
-    return;
+    let i = 0;
+    for (let skip = true, len = input.length; i < len - 14 && skip; i++) {
+        skip = false;
+        const str = input.substring(i, i + 14);
+        const key: { [key: string]: number } = {};
+        for (const c of str) {
+            key[c] ??= 0;
+            key[c]++;
+        }
+        for (const k in key) {
+            if (key[k] > 1) {
+                skip = true;
+                break;
+            }
+        }
+    }
+    return i + 13;
 }
 
 if (import.meta.main) {
