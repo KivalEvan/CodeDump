@@ -16,7 +16,7 @@ export function part1() {
     const input = getInput();
     const length = 4;
     let i = 0;
-    for (let skip = true, len = input.length; i < len - length && skip; i++) {
+    for (let skip = true, len = input.length - length; i < len && skip; i++) {
         skip = false;
         const str = input.substring(i, i + length);
         const set = new Set<string>();
@@ -36,7 +36,7 @@ export function part2() {
     const input = getInput();
     const length = 14;
     let i = 0;
-    for (let skip = false, len = input.length; i < len - length; i++) {
+    for (let skip = false, len = input.length - length; i < len; i++) {
         skip = false;
         const str = input.substring(i, i + length);
         const set = new Set<string>();
