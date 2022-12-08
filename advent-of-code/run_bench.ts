@@ -56,10 +56,10 @@ for (let year = startYear; year <= endYear; year++) {
 
             if (test) {
                 run.settings.test = true;
-                Deno.bench(`[${year} > Day ${day}] Test Part 1`, () => {
+                Deno.bench(`[${year} > Day ${day}] Test 1`, () => {
                     run.part1();
                 });
-                Deno.bench(`[${year} > Day ${day}] Test Part 2`, () => {
+                Deno.bench(`[${year} > Day ${day}] Test 2`, () => {
                     run.part2();
                 });
                 run.settings.test = false;

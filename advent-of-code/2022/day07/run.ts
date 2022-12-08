@@ -29,9 +29,7 @@ function getDirSize(input: string[][]) {
             continue;
         }
         if (s[0] === 'dir') {
-            if (!(typeof directories[dir + s[1] + '/'] === 'number')) {
-                directories[dir + s[1] + '/'] = 0;
-            }
+            directories[dir + s[1] + '/'] = 0;
         }
         if (s[0] !== 'dir') {
             let temp = dir;
