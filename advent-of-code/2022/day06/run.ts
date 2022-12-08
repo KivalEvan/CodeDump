@@ -14,44 +14,42 @@ export function getInput(alternate = false) {
 
 export function part1() {
     const input = getInput();
+    const length = 4;
     let i = 0;
-    for (let skip = true, len = input.length; i < len - 4 && skip; i++) {
+    for (let skip = true, len = input.length; i < len - length && skip; i++) {
         skip = false;
-        const str = input.substring(i, i + 4);
-        const key: { [key: string]: number } = {};
+        const str = input.substring(i, i + length);
+        const set = new Set<string>();
         for (const c of str) {
-            key[c] ??= 0;
-            key[c]++;
-        }
-        for (const k in key) {
-            if (key[k] > 1) {
+            if (set.has(c)) {
                 skip = true;
-                continue;
+                break;
             }
+            set.add(c);
         }
+        if (!skip) break;
     }
-    return i + 3;
+    return i + length;
 }
 
 export function part2() {
     const input = getInput();
+    const length = 14;
     let i = 0;
-    for (let skip = true, len = input.length; i < len - 14 && skip; i++) {
+    for (let skip = false, len = input.length; i < len - length; i++) {
         skip = false;
-        const str = input.substring(i, i + 14);
-        const key: { [key: string]: number } = {};
+        const str = input.substring(i, i + length);
+        const set = new Set<string>();
         for (const c of str) {
-            key[c] ??= 0;
-            key[c]++;
-        }
-        for (const k in key) {
-            if (key[k] > 1) {
+            if (set.has(c)) {
                 skip = true;
                 break;
             }
+            set.add(c);
         }
+        if (!skip) break;
     }
-    return i + 13;
+    return i + length;
 }
 
 if (import.meta.main) {

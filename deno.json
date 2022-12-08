@@ -7,6 +7,7 @@
         }
     },
     "tasks": {
-        "aoc": "deno run --watch --allow-read --allow-net=deno.land --allow-hrtime ./advent-of-code/runner.ts"
+        "aoc": "deno run --watch --allow-read --allow-net=deno.land --allow-hrtime ./advent-of-code/runner.ts",
+        "aoc:bench": "deno bench --allow-read --allow-net=deno.land --allow-hrtime ./advent-of-code/run_bench.ts --"
     }
 }

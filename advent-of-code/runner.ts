@@ -48,6 +48,8 @@ interface Run {
     part2: any;
 }
 
+let perfStart = performance.now();
+let perfEnd = performance.now();
 for (let year = startYear; year <= endYear; year++) {
     console.log(`Advent of Code -- year ${year}`);
     for (let day = startDay; day <= endDay; day++) {
@@ -61,32 +63,55 @@ for (let year = startYear; year <= endYear; year++) {
 
             if (test) {
                 run.settings.test = true;
+
+                perfStart = performance.now();
                 const test1 = run.part1();
-                const test2 = run.part2();
+                perfEnd = performance.now();
                 console.log('Test 1:', test1);
+                console.log(
+                    ' -- Time taken (ms):',
+                    Math.round((perfEnd - perfStart) * 100) / 100,
+                );
                 console.assert(
                     test1 === run.tests.part1,
                     `Expected ${run.tests.part1}`,
                 );
+
+                perfStart = performance.now();
+                const test2 = run.part2();
+                perfEnd = performance.now();
                 console.log('Test 2:', test2);
+                console.log(
+                    ' -- Time taken (ms):',
+                    Math.round((perfEnd - perfStart) * 100) / 100,
+                );
                 console.assert(
                     test2 === run.tests.part2,
                     `Expected ${run.tests.part2}`,
                 );
+
                 console.log();
                 run.settings.test = false;
             }
-            console.time('Time Taken');
+            perfStart = performance.now();
             const part1 = run.part1();
-            console.timeEnd('Time Taken');
+            perfEnd = performance.now();
             if (part1 === undefined) throw new Error('Part 1 is not finished.');
             console.log('Part 1:', part1);
+            console.log(
+                ' -- Time taken (ms):',
+                Math.round((perfEnd - perfStart) * 100) / 100,
+            );
 
-            console.time('Time Taken');
+            perfStart = performance.now();
             const part2 = run.part2();
-            console.timeEnd('Time Taken');
+            perfEnd = performance.now();
             if (part2 === undefined) throw new Error('Part 2 is not finished.');
             console.log('Part 2:', part2);
+            console.log(
+                ' -- Time taken (ms):',
+                Math.round((perfEnd - perfStart) * 100) / 100,
+            );
         } catch (e) {
             console.error(e);
             break;
