@@ -68,10 +68,12 @@ for (let year = startYear; year <= endYear; year++) {
                 const test1 = run.part1();
                 perfEnd = performance.now();
                 console.log('Test 1:', test1);
-                console.assert(
-                    test1 === run.tests.part1,
-                    `Expected ${run.tests.part1}`,
-                );
+                if (run.tests.part1) {
+                    console.assert(
+                        test1 === run.tests.part1,
+                        `Expected ${run.tests.part1}`,
+                    );
+                }
                 console.log(
                     ' -- Time taken (ms):',
                     Math.round((perfEnd - perfStart) * 100) / 100,
@@ -81,10 +83,12 @@ for (let year = startYear; year <= endYear; year++) {
                 const test2 = run.part2();
                 perfEnd = performance.now();
                 console.log('Test 2:', test2);
-                console.assert(
-                    test2 === run.tests.part2,
-                    `Expected ${run.tests.part2}`,
-                );
+                if (run.tests.part2) {
+                    console.assert(
+                        test2 === run.tests.part2,
+                        `Expected ${run.tests.part2}`,
+                    );
+                }
                 console.log(
                     ' -- Time taken (ms):',
                     Math.round((perfEnd - perfStart) * 100) / 100,
