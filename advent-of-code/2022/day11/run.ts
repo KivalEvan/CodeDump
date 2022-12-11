@@ -23,13 +23,13 @@ export function getInput(alternate = false) {
             modulo: 1,
             trueMonkee: parseInt(parsed[4].at(-1)!),
             falseMonkee: parseInt(parsed[5].at(-1)!),
-            operation: function (x: number, divide: boolean) {
+            inspecc: function (x: number, divide: boolean) {
                 const result = op === '*'
                     ? x * (!isNaN(itself) ? itself : x)
                     : x + (!isNaN(itself) ? itself : x);
                 return (divide ? Math.floor(result / 3) : result) % this.modulo;
             },
-            test: function (x: number) {
+            yeet: function (x: number) {
                 return !(x % this.divideBy) ? this.trueMonkee : this.falseMonkee;
             },
             inspected: 0,
@@ -49,8 +49,8 @@ export function part1() {
             let item = monkee[id].items.shift();
             while (item) {
                 monkee[id].inspected++;
-                item = monkee[id].operation(item, true);
-                monkee[monkee[id].test(item)].items.push(item);
+                item = monkee[id].inspecc(item, true);
+                monkee[monkee[id].yeet(item)].items.push(item);
                 item = monkee[id].items.shift();
             }
         }
@@ -72,10 +72,9 @@ export function part2() {
         for (const id in monkee) {
             let item = monkee[id].items.shift();
             while (item) {
-                item = monkee[id].operation(item, false);
-                monkee[monkee[id].test(item)].items.push(item);
+                item = monkee[id].inspecc(item, false);
+                monkee[monkee[id].yeet(item)].items.push(item);
                 monkee[id].inspected++;
-
                 item = monkee[id].items.shift();
             }
         }
