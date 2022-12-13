@@ -21,14 +21,7 @@ export function getInput(alternate = false) {
 const isArray = Array.isArray;
 
 function prettyPrint(ary: Signal): string {
-    return isArray(ary)
-        ? `[${
-            ary.reduce(
-                (p, c) => p + (isArray(c) ? prettyPrint(c) : c.toString()) + ',',
-                '',
-            ).replace(/,$/, '')
-        }]`
-        : ary.toString();
+    return isArray(ary) ? JSON.stringify(ary) : ary.toString();
 }
 
 // deno-lint-ignore no-explicit-any
