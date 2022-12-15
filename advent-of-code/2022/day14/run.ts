@@ -126,25 +126,33 @@ export function part1() {
 
 export function part2() {
     const input = getInput();
+    const CURRENT_Y = Math.max(...input.flat().map((n) => n[1])) + 2;
     input.push([
-        [0, Math.max(...input.flat().map((n) => n[1])) + 2],
-        [1000, Math.max(...input.flat().map((n) => n[1])) + 2],
+        [500 - CURRENT_Y, CURRENT_Y],
+        [500 + CURRENT_Y, CURRENT_Y],
     ]);
-    const MAX_X = Math.max(...input.flat().map((n) => n[0])) + 1;
-    const MAX_Y = Math.max(...input.flat().map((n) => n[1])) + 1;
+    const allCoordinates = input.flat();
+    const allX = allCoordinates.map((n) => n[0]);
+    const allY = allCoordinates.map((n) => n[1]);
+
+    const MIN_X = Math.min(...allX);
+    const MAX_X = Math.max(...allX) + 1;
+    const MAX_Y = Math.max(...allY) + 1;
+
+    const offset = 500 - MIN_X;
 
     const grid = new Array(MAX_Y);
     for (let y = 0; y < MAX_Y; y++) {
-        grid[y] = new Array(MAX_X).fill('.');
+        grid[y] = new Array(MAX_X - MIN_X).fill('.');
     }
     for (const path of input) {
-        draw(grid, path, 0);
+        draw(grid, path, -MIN_X);
     }
     let sum = 0;
-    while (sand(grid, 500)) {
-        // console.log(grid.map((g) => g.join('')).join('\n'));
+    while (sand(grid, offset)) {
         sum++;
     }
+    // console.log(grid.map((g) => g.join('')).join('\n'));
     return sum;
 }
 
