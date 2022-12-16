@@ -1,4 +1,4 @@
-export const tests = { part1: null, part2: null };
+export const tests = { part1: 26, part2: 56000011 };
 export const settings = {
     path: '',
     test: false,
@@ -9,17 +9,78 @@ export function getInput(alternate = false) {
         settings.path +
             (settings.test ? (alternate ? 'test2.txt' : 'test.txt') : 'input.txt'),
     ).replace('\r', '');
-    return input;
+    return input.split('\n').map((str) =>
+        str.split(':').map((s) =>
+            s
+                .trim()
+                .slice(s.indexOf('x'))
+                .replace(/(x|y)?=?/g, '')
+                .split(', ')
+                .map((n) => parseInt(n))
+        )
+    ) as [number, number][][];
 }
 
 export function part1() {
     const input = getInput();
-    return;
+    const mark = new Set<number>();
+    const AT_Y = settings.test ? 10 : 2_000_000;
+    for (const [sensor, beacon] of input) {
+        const distance = Math.abs(beacon[0] - sensor[0]) +
+            Math.abs(beacon[1] - sensor[1]);
+
+        for (let y = 0; y < distance; y++) {
+            if (sensor[1] - y === AT_Y) {
+                for (let x = 0; x <= distance - y; x++) {
+                    mark.add(sensor[0] + x);
+                    mark.add(sensor[0] - x);
+                }
+                break;
+            }
+            if (sensor[1] + y === AT_Y) {
+                for (let x = 0; x <= distance - y; x++) {
+                    mark.add(sensor[0] + x);
+                    mark.add(sensor[0] - x);
+                }
+                break;
+            }
+        }
+    }
+    const b = input.map((x) => x[1]).find((x) => x[1] === AT_Y);
+    mark.delete(b![0]);
+    // console.log(new Set(Array.from(mark).sort((a, b) => a - b)));
+    return mark.size;
 }
 
 export function part2() {
     const input = getInput();
-    return;
+    const mark = new Set<number>();
+    const MIN = 0;
+    const MAX = 4_000_000;
+    const coordinate = [0, 0];
+
+    for (const [sensor, beacon] of input) {
+        const distance = Math.abs(beacon[0] - sensor[0]) +
+            Math.abs(beacon[1] - sensor[1]);
+
+        for (let y = 0; y < distance; y++) {
+            // if (sensor[1] - y === AT_Y) {
+            //     for (let x = 0; x <= distance - y; x++) {
+            //         mark.add(sensor[0] + x);
+            //         mark.add(sensor[0] - x);
+            //     }
+            //     break;
+            // }
+            // if (sensor[1] + y === AT_Y) {
+            //     for (let x = 0; x <= distance - y; x++) {
+            //         mark.add(sensor[0] + x);
+            //         mark.add(sensor[0] - x);
+            //     }
+            //     break;
+            // }
+        }
+    }
+    return coordinate[0] * MAX + coordinate[1];
 }
 
 if (import.meta.main) {
