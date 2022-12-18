@@ -16,7 +16,7 @@ export function getInput(alternate = false) {
                 .slice(s.indexOf('x'))
                 .replace(/(x|y)?=?/g, '')
                 .split(', ')
-                .map((n) => parseInt(n))
+                .map(Number)
         )
     ) as [number, number][][];
 }
