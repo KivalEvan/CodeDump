@@ -1,5 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
-import { parse } from 'https://deno.land/std@0.167.0/flags/mod.ts';
+import { parse } from 'https://deno.land/std@0.190.0/flags/mod.ts';
+import { resolve } from 'https://deno.land/std@0.190.0/path/mod.ts';
 
 console.log('https://adventofcode.com/');
 
@@ -55,11 +56,11 @@ for (let year = startYear; year <= endYear; year++) {
     for (let day = startDay; day <= endDay; day++) {
         try {
             console.log();
-            const destinationPath = `./${year}/day${day.toString().padStart(2, '0')}/`;
+            const destinationPath = resolve(`./${year}/day${day.toString().padStart(2, '0')}`);
             const run = (await import(`${destinationPath}/run.ts`)) as Run;
             if (!run) throw new Error('Run file not found.');
             console.log(`----\\________\n${year} -- day ${day}`);
-            run.settings.path = './advent-of-code/' + destinationPath;
+            run.settings.path = destinationPath + '/';
 
             if (test) {
                 run.settings.test = true;
