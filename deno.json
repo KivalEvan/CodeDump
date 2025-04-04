@@ -1,13 +1,10 @@
 {
-    "fmt": {
-        "options": {
-            "indentWidth": 4,
-            "lineWidth": 88,
-            "singleQuote": true
-        }
-    },
-    "tasks": {
-        "aoc": "deno run --watch --allow-read --allow-net=deno.land --allow-hrtime ./advent-of-code/runner.ts",
-        "aoc:bench": "deno bench --allow-read --allow-net=deno.land --allow-hrtime ./advent-of-code/run_bench.ts --"
-    }
+   "lock": false,
+   "fmt": {
+      "options": {
+         "indentWidth": 3,
+         "lineWidth": 100,
+         "singleQuote": true
+      }
+   }
 }

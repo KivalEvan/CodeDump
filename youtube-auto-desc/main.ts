@@ -1,14 +1,19 @@
 import { getData } from './data.ts';
 import { YouTube } from './deps.ts';
 import { getDescription } from './description.ts';
-import { YouTubePlaylistItems, YouTubePlaylists, YoutubeResponse, YouTubeVideo } from './type.ts';
+import { YouTubePlaylistItems, YouTubePlaylists, YoutubeResponse, YouTubeVideo } from './types.ts';
 
 const data = await getData();
 let completed = Deno.readTextFileSync('./completed.txt');
 
-const yt = new YouTube(Deno.env.get('GOOGLE_API_KEY')!, Deno.env.get('GOOGLE_ACCESS_TOKEN')!);
+const yt = new YouTube(
+   Deno.env.get('GOOGLE_API_KEY')!,
+   Deno.env.get('GOOGLE_ACCESS_TOKEN')!,
+);
 
-let playlists: YoutubeResponse<YouTubePlaylists> = await Deno.readTextFile('./playlists.txt')
+let playlists: YoutubeResponse<YouTubePlaylists> = await Deno.readTextFile(
+   './playlist/playlists.txt',
+)
    .then(JSON.parse)
    .catch((_) => null);
 
@@ -19,7 +24,7 @@ if (!playlists) {
       maxResults: 50,
    });
    if (playlists.error) throw playlists.error;
-   Deno.writeTextFileSync('./playlists.txt', JSON.stringify(playlists));
+   Deno.writeTextFileSync('./playlist/playlists.txt', JSON.stringify(playlists));
 }
 
 const packSet = new Set(data.map((e) => e.pack));
@@ -31,12 +36,13 @@ for (
          !e.snippet.title.endsWith('Map Preview'),
    )
 ) {
-   const pack = playlist.snippet.title.slice(playlist.snippet.title.indexOf('|') + 2);
-   if (pack === 'OST Vol. 6') continue;
+   const pack = playlist.snippet.title.slice(
+      playlist.snippet.title.indexOf('|') + 2,
+   );
    if (!packSet.has(pack)) throw new Error('Unknown pack: ' + pack);
-   console.log('reading', './playlist-' + pack + '.txt');
+   console.log('reading', './playlist/' + pack + '.txt');
    let playlistItems: YoutubeResponse<YouTubePlaylistItems> = await Deno.readTextFile(
-      './playlist-' + pack + '.txt',
+      './playlist/' + pack + '.txt',
    )
       .then(JSON.parse)
       .catch((_) => null);
@@ -54,7 +60,10 @@ for (
          nextToken = currentItems.nextPageToken;
       }
       if (playlistItems.error) throw playlistItems.error;
-      Deno.writeTextFileSync('./playlist-' + pack + '.txt', JSON.stringify(playlistItems));
+      Deno.writeTextFileSync(
+         './playlist/' + pack + '.txt',
+         JSON.stringify(playlistItems),
+      );
    }
 
    const songList: [string, string][] = playlist.snippet.description
@@ -71,7 +80,11 @@ for (
          return [d[0], d.slice(1).join(' - ')];
       });
 
-   for (const map of data.filter((e) => playlist.snippet.title.split('|')[1].trim() === e.pack)) {
+   for (
+      const map of data.filter(
+         (e) => playlist.snippet.title.split('|')[1].trim() === e.pack,
+      )
+   ) {
       const diffTag = `[${map.difficulty}${
          map.characteristic === 'Standard' ? '' : ` (${map.characteristic})`
       }]`;
@@ -80,6 +93,7 @@ for (
             .slice(e.snippet.title.indexOf('|'))
             .replaceAll('’', "'")
             .replaceAll('‘', "'")
+            .replaceAll('…', '...')
             .toLowerCase()
             .includes(map.title.toLowerCase())
       );

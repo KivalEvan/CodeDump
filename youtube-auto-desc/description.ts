@@ -1,62 +1,6 @@
 import { NoteJumpSpeed, round, toMmss } from './deps.ts';
-import { BeatmapData, YouTubePlaylistItems } from './type.ts';
-
-// honestly i forgor
-const HardwareSettings: {
-   [key: string]: { platform: string; name: string; connection: string };
-} = {
-   '01-01-2020': { platform: 'PCVR', name: 'Meta Quest 2', connection: 'Link' },
-   '01-01-2019': { platform: 'PCVR', name: 'HTC Vive', connection: 'Wired' },
-};
-const ControllerOffsetSettings: {
-   [key: string]: {
-      pos: { x: number; y: number; z: number };
-      rot: { x: number; y: number; z: number };
-   };
-} = {
-   '01-04-2024': { pos: { x: -1, y: -0.5, z: 0 }, rot: { x: 9, y: -8, z: 0 } },
-   '01-03-2024': {
-      pos: { x: -1.6, y: -0.8, z: 0 },
-      rot: { x: 9, y: -9, z: 0 },
-   },
-   '01-01-2024': {
-      pos: { x: -1.2, y: -0.8, z: -1.6 },
-      rot: { x: 8, y: -8, z: 0 },
-   },
-   '01-10-2023': {
-      pos: { x: -1.2, y: -0.8, z: 0 },
-      rot: { x: 8, y: -8, z: 0 },
-   },
-   '01-01-2023': {
-      pos: { x: -1.2, y: -0.8, z: 0 },
-      rot: { x: 8, y: -2, z: 0 },
-   },
-};
-const CameraSettings: {
-   [key: string]: {
-      fov: number;
-      zOffset: number;
-      smoothPos: number;
-      smoothRot: number;
-   };
-} = {
-   '01-01-2023': { fov: 64, zOffset: -0.375, smoothPos: 14, smoothRot: 7 },
-   '01-01-2022': { fov: 64, zOffset: -0.4, smoothPos: 14, smoothRot: 7 },
-   '01-01-2020': { fov: 70, zOffset: -0.4, smoothPos: 12, smoothRot: 6 },
-   '01-01-2019': { fov: 90, zOffset: -0.5, smoothPos: 12, smoothRot: 6 },
-};
-
-function getSettings<T>(
-   settings: { [key: string]: T },
-   date: Date,
-): T | undefined {
-   for (const settingsDate in settings) {
-      const d = new Date(settingsDate);
-      if (date > d) {
-         return settings[settingsDate];
-      }
-   }
-}
+import { getSettings, HardwareSettings, ControllerOffsetSettings, CameraSettings } from './settings.ts';
+import { BeatmapData, YouTubePlaylistItems } from './types.ts';
 
 function getCustomDescription(bmData: BeatmapData): string {
    switch (bmData.title) {
