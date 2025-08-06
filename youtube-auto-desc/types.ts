@@ -340,6 +340,9 @@ export type BeatmapRawData = {
    bpmEvents: {
       total: number;
    };
+   njsEvents?: {
+      total: number;
+   };
    lightColorEventBoxGroups?: {
       total: number;
    };
@@ -382,7 +385,7 @@ export type BeatmapData = {
    notes: { color: number; bomb: number };
    obstacles: number;
    sliders: { arc: number; chain: number };
-   events: { basic: number; boost: number; rotation: number; bpm: number };
+   events: { basic: number; boost: number; rotation: number; bpm: number, njs: number };
    eventGroups: {
       color: number;
       rotate: number;

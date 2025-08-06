@@ -82,7 +82,7 @@ for (
 
    for (
       const map of data.filter(
-         (e) => playlist.snippet.title.split('|')[1].trim() === e.pack,
+         (e) => playlist.snippet.title.split('|')[1].trim() === e.pack && !e.title.includes('Power of the'),
       )
    ) {
       const diffTag = `[${map.difficulty}${

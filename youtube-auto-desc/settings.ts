@@ -2,6 +2,7 @@
 export const HardwareSettings: {
    [key: string]: { platform: string; name: string; connection: string };
 } = {
+   '07-01-2025': { platform: 'PCVR', name: 'PS VR2', connection: 'Wired' },
    '11-01-2024': { platform: 'PCVR', name: 'Meta Quest 3', connection: 'Link' },
    '01-01-2020': { platform: 'PCVR', name: 'Meta Quest 2', connection: 'Link' },
    '01-01-2019': { platform: 'PCVR', name: 'HTC Vive', connection: 'Wired' },
@@ -12,6 +13,9 @@ export const ControllerOffsetSettings: {
       rot: { x: number; y: number; z: number };
    };
 } = {
+   '08-01-2025': { pos: { x: 0, y: -6, z: -4 }, rot: { x: 41, y: -3, z: 0 } },
+   '07-01-2025': { pos: { x: 0, y: -6, z: -4 }, rot: { x: 42, y: -3, z: 0 } },
+   '02-01-2025': { pos: { x: -1.5, y: -6, z: -3 }, rot: { x: 36, y: -18, z: 0 } },
    '01-02-2025': { pos: { x: -0.5, y: -5.5, z: -7 }, rot: { x: 41, y: -20, z: 0 } },
    '11-15-2024': { pos: { x: -0.5, y: -7, z: -1.2 }, rot: { x: 45, y: -8, z: 0 } },
    '11-01-2024': { pos: { x: 2.5, y: -6, z: 5 }, rot: { x: 42, y: -3, z: 0 } },
